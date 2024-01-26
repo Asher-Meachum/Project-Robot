@@ -22,47 +22,25 @@ robot_car = RobotCar(motor_pins, 20000)
 
 if __name__ == '__main__':
     try:
-        # Test forward, reverse, stop, turn left and turn right
-        print("*********Testing forward, reverse and loop*********")
-        for i in range(2):
-            print("Moving forward")
-            robot_car.forward()
-            time.sleep(2)
-            print("Moving backward")
-            robot_car.back()
-            time.sleep(2)
-            print("stop")
-            robot_car.stop()
-            time.sleep(2)
-            print("turn left")
-            robot_car.left()
-            time.sleep(2)
-            print("turn right")
-            robot_car.right()
-            time.sleep(2)
+        '''
+        robot_car.forward()
+        robot_car.back()
+        robot_car.stop()
+        robot_car.left()
+        robot_car.right()
+        
+        robot_car.change_speed(100); # Changes speed to 100%
+        robot_car.forward()
             
-        print("*********Testing speed*********")
-        for i in range(2):
-            print("Moving at 100% speed")
-            robot_car.change_speed(100);
-            robot_car.forward()
-            time.sleep(2)
+        robot_car.change_speed(50); # Changes speed to 50%
+        robot_car.forward()
             
-            print("Moving at 50% speed")
-            robot_car.change_speed(50);
-            robot_car.forward()
-            time.sleep(2)
+        robot_car.change_speed(20); # Changes speed to 20%
+        robot_car.forward()
             
-            print("Moving at 20% of speed")
-            robot_car.change_speed(20);
-            robot_car.forward()
-            time.sleep(2)
-            
-            print("Moving at 0% of speed or the slowest")
-            robot_car.change_speed(0);
-            robot_car.forward()
-            time.sleep(2)
-
+        robot_car.change_speed(0); #Changes speet to 0%
+        robot_car.forward()     
+        '''
         SLEEP.value(0)
         LED.value(0)
         robot_car.deinit()
