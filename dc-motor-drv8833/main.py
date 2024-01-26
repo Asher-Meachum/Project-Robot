@@ -10,6 +10,7 @@ RIGHT_MOTOR_PIN_2 = 19
 
 # Other GPIO Pins
 SLEEP = Pin(15, Pin.OUT) # This allows the DRV8833 to be turned on.
+LED = Pin("LED", Pin.OUT) # When not connected to a computer or display, we can use this to know when the code starts, when it ends, and at what point we are in the code.
 
 motor_pins = [LEFT_MOTOR_PIN_1, LEFT_MOTOR_PIN_2, RIGHT_MOTOR_PIN_1, RIGHT_MOTOR_PIN_2]
 
