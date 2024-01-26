@@ -1,7 +1,7 @@
 
 from machine import Pin
 from machine import PWM
-import utime
+import time
 
 '''
 Class to represent our robot car
@@ -71,7 +71,7 @@ class RobotCar:
         """deinit PWM Pins"""
         print("Deinitializing PWM Pins")
         self.stop()
-        utime.sleep(0.1)
+        time.sleep(0.1)
         self.left_motor_pin1.deinit()
         self.left_motor_pin2.deinit()
         self.right_motor_pin1.deinit()
