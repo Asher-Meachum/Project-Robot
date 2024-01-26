@@ -1,4 +1,5 @@
 from robot_car import RobotCar
+from machine import Pin
 import utime
 
 # Pico W GPIO Pin
@@ -6,6 +7,9 @@ LEFT_MOTOR_PIN_1 = 16
 LEFT_MOTOR_PIN_2 = 17
 RIGHT_MOTOR_PIN_1 = 18
 RIGHT_MOTOR_PIN_2 = 19
+
+# Other GPIO Pins
+SLEEP = Pin(15, Pin.OUT) # This allows the DRV8833 to be turned on.
 
 motor_pins = [LEFT_MOTOR_PIN_1, LEFT_MOTOR_PIN_2, RIGHT_MOTOR_PIN_1, RIGHT_MOTOR_PIN_2]
 
