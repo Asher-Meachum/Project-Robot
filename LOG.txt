@@ -1,1 +1,1 @@
-
+02/07/2024 When attempting the first trial, I noticed a bug that was causing only the right wheel to turn. This led to the discovery that I had forgotten to reverse the names for forward and backward and left and right.
