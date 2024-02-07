@@ -2,3 +2,4 @@ Link to test log: https://docs.google.com/spreadsheets/d/1xlAd9yrb0KErcTImNO97l-
 
 02/07/2024 When attempting the first trial, I noticed a bug that was causing only the right wheel to turn. This led to the discovery that I had forgotten to reverse the names for forward and backward and left and right.
 Issues were not completely remediated. Testing will occur before major rewrite of robot_car.py.
+Test was not possible due to the irregularity of outputs with the same code.
