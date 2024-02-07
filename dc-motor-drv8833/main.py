@@ -34,9 +34,9 @@ if __name__ == '__main__':
         
         SLEEP.value(0)
         LED.value(0)
-        robot_car.deinit()
+        car.deinit()
 
     except KeyboardInterrupt:
         SLEEP.value(0)
         LED.value(0)
-        robot_car.deinit()
+        car.deinit()
