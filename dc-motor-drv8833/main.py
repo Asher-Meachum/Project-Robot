@@ -38,7 +38,7 @@ if __name__ == '__main__':
         robot_car.change_speed(20); # Changes speed to 20%
         robot_car.forward()
             
-        robot_car.change_speed(0); #Changes speet to 0%
+        robot_car.change_speed(0); #Changes speed to 0%
         robot_car.forward()     
         '''
         SLEEP.value(0)
