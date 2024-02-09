@@ -29,11 +29,11 @@ def south():
     car.back()
     sleep(straight_time)
 
-def west():
+def left():
     car.left()
     sleep(turn_time)
 
-def east():
+def right():
     car.right():
     sleep(turn_time)
 
