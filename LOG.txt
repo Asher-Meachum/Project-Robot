@@ -6,4 +6,4 @@ Issues were not completely remediated. Testing will occur before major rewrite o
 Further examintation showed a misplaced pin between GPIO Pin 19 and AIN2. This did not clear up the problem; the right motor to turn.
 
 02/09/2024
-I replaced the jumper wires connecting the right wheel to the DRV8833. After this modification, the wheel did work. The robot went much faster than anticipated, and did not go on the planned path.
+I replaced the jumper wires connecting the right wheel to the DRV8833. After this modification, the wheel did work.
