@@ -11,6 +11,7 @@ No speed - car.change_speed(0)
 from robot_car import RobotCar
 from machine import Pin
 from time import sleep
+from rp2 import bootsel_button
 
 # Pico W GPIO Pin
 LEFT_MOTOR_PIN_1 = 16
@@ -30,10 +31,11 @@ car = RobotCar(motor_pins, 20000) # Create an instance of our robot car
 
 if __name__ == '__main__':
     try:
+        if bootsel_button():
 
-        SLEEP.value(0)
-        LED.value(0)
-        car.deinit()
+            SLEEP.value(0)
+            LED.value(0)
+            car.deinit()
 
     except KeyboardInterrupt:
         SLEEP.value(0)
