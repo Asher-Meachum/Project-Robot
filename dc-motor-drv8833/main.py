@@ -24,6 +24,22 @@ def deinitialization():
     LED.value(0)
     car.deinit()
 
+def n():
+    car.forward()
+    sleep(1.15)
+
+def s():
+    car.back()
+    sleep(1.15)
+
+def w():
+    car.left()
+    sleep(0.38)
+
+def e():
+    car.right()
+    sleep(0.38)
+
 try:
     initialization()
     if bootsel_button():
