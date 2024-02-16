@@ -13,13 +13,12 @@ from rp2 import bootsel_button
 SLEEP = Pin(15, Pin.OUT) # This allows the DRV8833 to be turned on.
 LED = Pin("LED", Pin.OUT) # When not connected to a computer or display, we can use this to know when the code starts, when it ends, and at what point we are in the code.
 
-def initilization():
-    motor_pins = [16, 17, 18, 19]
-    SLEEP.value(1) # Turns pin 15 to high.
-    LED.value(1) # Turns the onboard LED on.
-    car = RobotCar(motor_pins, 20000) # Create an instance of our robot car
+motor_pins = [16, 17, 18, 19]
+SLEEP.value(1) # Turns pin 15 to high.
+LED.value(1) # Turns the onboard LED on.
+car = RobotCar(motor_pins, 20000) # Create an instance of our robot car
 
-def deinitialization():
+def deinit():
     SLEEP.value(0)
     LED.value(0)
     car.deinit()
@@ -41,10 +40,10 @@ def e():
     sleep(0.38)
 
 try:
-    initialization()
-    if bootsel_button():
+    while True:
+        if bootsel_button():
 
-        deinitialization()
+            deinit()
 
 except KeyboardInterrupt:
-    deinitialization()
+    deinit()
