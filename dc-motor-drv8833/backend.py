@@ -28,25 +28,25 @@ def stop():
     b2.duty_u16(0)
     sleep(1)
 
-def north():
+def south():
     a1.duty_u16(a)
     b1.duty_u16(b)
     sleep(.5)
     stop()
 
-def south():
+def north():
     a2.duty_u16(a)
     b2.duty_u16(b)
     sleep(.5)
     stop()
 
-def east():
+def west():
     a2.duty_u16(a)
     b1.duty_u16(b)
     sleep(.5)
     stop()
 
-def west():
+def east():
     a1.duty_u16(a)
     b2.duty_u16(b)
     sleep(.5)
