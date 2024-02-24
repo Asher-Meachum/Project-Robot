@@ -10,3 +10,6 @@ I replaced the jumper wires connecting the right wheel to the DRV8833. After thi
 
 02/23/2024
 I replaced the motors and wheels, which under a quick run appeared to clear up the problem of the curved path. Further testing is needed to check to see if the distance is regular and confirm it does not follow a curved trajectory.
+
+02/24/2024
+The curved trajectory appears to be caused by the caster wheel's starting direction. Reversing the front and back end seems to have fixed the problem.
