@@ -1,6 +1,9 @@
 from machine import PWM
 from machine import Pin
 from time import sleep
+import gc
+
+gc.disable() # This disables automatic garbage collection, making sure it isn't interfering with timing.
 
 slp = Pin(15, Pin.OUT)
 a1 = PWM(Pin(17))
@@ -33,24 +36,29 @@ def south():
     b1.duty_u16(b)
     sleep(.5)
     stop()
+    gc.collect()
+    
 
 def north():
     a2.duty_u16(a)
     b2.duty_u16(b)
     sleep(.5)
     stop()
+    gc.collect()
 
 def west():
     a2.duty_u16(a)
     b1.duty_u16(b)
     sleep(.5)
     stop()
+    gc.collect()
 
 def east():
     a1.duty_u16(a)
     b2.duty_u16(b)
     sleep(.5)
     stop()
+    gc.collect()
     
 def deinit():
     a1.deinit()
