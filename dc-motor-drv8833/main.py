@@ -18,6 +18,7 @@ try:
     while True:
         if bootsel_button():
             gc.collect()
+            sleep(1)
 
             deinit()
             break
