@@ -1,8 +1,8 @@
-import backend as lib
-from machine import Pin
-from time import sleep
-from rp2 import bootsel_button
 import gc
+from machine import Pin
+from rp2 import bootsel_button
+from time import sleep
+import backend as lib
 
 # This makes sure automatic garbage collection doesn't mess up timing.
 gc.disable()
