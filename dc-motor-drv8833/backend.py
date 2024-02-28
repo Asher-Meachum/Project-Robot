@@ -1,9 +1,9 @@
-from machine import PWM
-from machine import Pin
+from machine import PWM, Pin
 from time import sleep
 import gc
 
-gc.disable() # This disables automatic garbage collection, making sure it isn't interfering with timing.
+# This makes sure automatic garbage collection doesn't interfering with timing.
+gc.disable()
 
 slp = Pin(15, Pin.OUT)
 a1 = PWM(Pin(17))
