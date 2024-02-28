@@ -4,10 +4,12 @@ from time import sleep
 from rp2 import bootsel_button
 import gc
 
+# This makes sure automatic garbage collection doesn't mess up timing.
 gc.disable()
 
-LED = Pin("LED", Pin.OUT) # When not connected to a computer or display, we can use this to know when the code starts, when it ends, and at what point we are in the code.
-LED.value(1) # Turns the onboard LED on.
+# For program start confirmation when not at a display.
+LED = Pin("LED", Pin.OUT)
+LED.value(1)
 
 def deinit():
     LED.value(0)
