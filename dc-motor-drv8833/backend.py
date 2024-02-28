@@ -21,8 +21,7 @@ b1.duty_u16(0)
 b2.freq(1000)
 b2.duty_u16(0)
 
-a = 65535
-b = 65535
+pwm_val = 0
 
 def stop():
     a1.duty_u16(0)
@@ -31,34 +30,55 @@ def stop():
     b2.duty_u16(0)
     sleep(1)
 
-def south():
-    a1.duty_u16(a)
-    b1.duty_u16(b)
-    sleep(.5)
+def func_clean():
     stop()
+    pwm_val = 0
     gc.collect()
+
+def south():
+    while pwm_val < 65535:
+        pwm_val+= 2048
+        if pwm_val == 63488:
+            pwm_val-= 1
+        a1.duty_u16(pwm_val)
+        b1.duty_u16(pwm_val)
+        sleep(.1)
+    sleep(.5)
+    func_clean()
     
 
 def north():
-    a2.duty_u16(a)
-    b2.duty_u16(b)
+    while pwm_val < 65535:
+        pwm_val+= 2048
+        if pwm_val == 63488:
+            pwm_val-= 1
+        a2.duty_u16(pwm_val)
+        b2.duty_u16(pwm_val)
+        sleep(.1)
     sleep(.5)
-    stop()
-    gc.collect()
+    func_clean()
 
 def west():
-    a2.duty_u16(a)
-    b1.duty_u16(b)
+    while pwm_val < 65535:
+        pwm_val+= 2048
+        if pwm_val == 63488:
+            pwm_val-= 1
+        a2.duty_u16(pwm_val)
+        b1.duty_u16(pwm_val)
+        sleep(.1)
     sleep(.5)
-    stop()
-    gc.collect()
+    func_clean()
 
 def east():
-    a1.duty_u16(a)
-    b2.duty_u16(b)
+    while pwm_val < 65535:
+        pwm_val+= 2048
+        if pwm_val == 63488:
+            pwm_val-= 1
+        a1.duty_u16(pwm_val)
+        b2.duty_u16(pwm_val)
+        sleep(.1)
     sleep(.5)
-    stop()
-    gc.collect()
+    func_clean()
     
 def deinit():
     a1.deinit()
