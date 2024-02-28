@@ -21,8 +21,6 @@ b1.duty_u16(0)
 b2.freq(1000)
 b2.duty_u16(0)
 
-pwm_val = 0
-
 def stop():
     a1.duty_u16(0)
     a2.duty_u16(0)
@@ -32,10 +30,10 @@ def stop():
 
 def func_clean():
     stop()
-    pwm_val = 0
     gc.collect()
 
 def south():
+    pwm_val = 0
     while pwm_val < 65535:
         pwm_val+= 2048
         if pwm_val == 63488:
@@ -48,6 +46,7 @@ def south():
     
 
 def north():
+    pwm_val = 0
     while pwm_val < 65535:
         pwm_val+= 2048
         if pwm_val == 63488:
@@ -59,6 +58,7 @@ def north():
     func_clean()
 
 def west():
+    pwm_val = 0
     while pwm_val < 65535:
         pwm_val+= 2048
         if pwm_val == 63488:
@@ -70,6 +70,7 @@ def west():
     func_clean()
 
 def east():
+    pwm_val = 0
     while pwm_val < 65535:
         pwm_val+= 2048
         if pwm_val == 63488:
