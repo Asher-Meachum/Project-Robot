@@ -82,6 +82,7 @@ def east():
     func_clean()
     
 def deinit():
+    slp.value(0)
     a1.deinit()
     a2.deinit()
     b1.deinit()
