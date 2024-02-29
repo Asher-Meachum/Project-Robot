@@ -41,7 +41,13 @@ def south():
         a1.duty_u16(pwm_val)
         b1.duty_u16(pwm_val)
         sleep(.1)
-    sleep(.5)
+    while pwm_val > 0:
+        pwm_val- = 2048
+        a1.duty_u16(pwm_val)
+        b1.duty_u16(pwm_val)
+        if pwm_val == 2047:
+            pwm_val+ = 1
+        sleep(0.01)
     func_clean()
     
 
@@ -54,7 +60,13 @@ def north():
         a2.duty_u16(pwm_val)
         b2.duty_u16(pwm_val)
         sleep(.1)
-    sleep(.5)
+     while pwm_val > 0:
+        pwm_val- = 2048
+        a2.duty_u16(pwm_val)
+        b2.duty_u16(pwm_val)
+        if pwm_val == 2047:
+            pwm_val+ = 1
+        sleep(0.01)
     func_clean()
 
 def west():
@@ -66,7 +78,13 @@ def west():
         a2.duty_u16(pwm_val)
         b1.duty_u16(pwm_val)
         sleep(.1)
-    sleep(.5)
+     while pwm_val > 0:
+        pwm_val- = 2048
+        a2.duty_u16(pwm_val)
+        b1.duty_u16(pwm_val)
+        if pwm_val == 2047:
+            pwm_val+ = 1
+        sleep(0.01)
     func_clean()
 
 def east():
@@ -78,7 +96,13 @@ def east():
         a1.duty_u16(pwm_val)
         b2.duty_u16(pwm_val)
         sleep(.1)
-    sleep(.5)
+     while pwm_val > 0:
+        pwm_val- = 2048
+        a1.duty_u16(pwm_val)
+        b2.duty_u16(pwm_val)
+        if pwm_val == 2047:
+            pwm_val+ = 1
+        sleep(0.01)
     func_clean()
     
 def deinit():
