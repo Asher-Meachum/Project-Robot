@@ -5,105 +5,81 @@ import gc
 # This makes sure automatic garbage collection doesn't interfering with timing.
 gc.disable()
 
-slp = Pin(15, Pin.OUT)
+slp = Pin(15, Pin.OUT) # This turns the DRV8833 board on. Is for Adafruit board.
 a1 = PWM(Pin(17))
 a2 = PWM(Pin(16))
 b1 = PWM(Pin(19))
 b2 = PWM(Pin(18))
 
 slp.value(1)
-a1.freq(1000)
-a1.duty_u16(0)
-a2.freq(1000)
-a2.duty_u16(0)
-b1.freq(1000)
-b1.duty_u16(0)
-b2.freq(1000)
-b2.duty_u16(0)
+a1.init(freq = 1000, duty_u16 = 0)
+a2.init(freq = 1000, duty_u16 = 0)
+b1.init(freq = 1000, duty_u16 = 0)
+b2.init(freq = 1000, duty_u16 = 0)
 
-def stop():
-    a1.duty_u16(0)
-    a2.duty_u16(0)
-    b1.duty_u16(0)
-    b2.duty_u16(0)
-    sleep(1)
-
-def func_clean():
-    stop()
-    gc.collect()
-
-def south():
+def accel(adir):
+    magic_num = 2048
     pwm_val = 0
     while pwm_val < 65535:
-        pwm_val+= 2048
-        if pwm_val == 63488:
+        pwm_val+= magic_num
+        if pwm_val == magic_num:
             pwm_val-= 1
-        a1.duty_u16(pwm_val)
-        b1.duty_u16(pwm_val)
-        sleep(.1)
+        if adir == "n":
+            a2.duty_u16(pwm_val)
+            sleep(.05)
+            b2.duty_u16(pwm_val)
+        elif adir == "s":
+            a1.duty_u16(pwm_val)
+            sleep(0.02)
+            b1.duty_u16(pwm_val)
+        elif adir == "e":
+            a1.duty_u16(pwm_val)
+            sleep(0.003)
+            b2.duty_u16(pwm_val)
+        elif adir == "w":
+            a2.duty_u16(pwm_val)
+            sleep(0.01)
+            b1.duty_u16(pwm_val)
+        sleep(0.1)
+
+def deaccel(ddir):
+    magic_num = 2048
+    pwm_val = 65535
     while pwm_val > 0:
-        pwm_val- = 2048
-        a1.duty_u16(pwm_val)
-        b1.duty_u16(pwm_val)
-        if pwm_val == 2047:
-            pwm_val+ = 1
-        sleep(0.01)
-    func_clean()
-    
-
-def north():
-    pwm_val = 0
-    while pwm_val < 65535:
-        pwm_val+= 2048
-        if pwm_val == 63488:
+        pwm_val-= magic_num
+        if pwm_val == magic_num:
             pwm_val-= 1
-        a2.duty_u16(pwm_val)
-        b2.duty_u16(pwm_val)
-        sleep(.1)
-     while pwm_val > 0:
-        pwm_val- = 2048
-        a2.duty_u16(pwm_val)
-        b2.duty_u16(pwm_val)
-        if pwm_val == 2047:
-            pwm_val+ = 1
-        sleep(0.01)
-    func_clean()
+        if ddir == "n":
+            a2.duty_u16(pwm_val)
+            b2.duty_u16(pwm_val)
+        elif ddir == "s":
+            a1.duty_u16(pwm_val)
+            b1.duty_u16(pwm_val)
+        elif ddir == "e":
+            a1.duty_u16(pwm_val)
+            b2.duty_u16(pwm_val)
+        elif ddir == "w":
+            a2.duty_u16(pwm_val)
+            b1.duty_u16(pwm_val)
+        sleep(0.1)
 
-def west():
-    pwm_val = 0
-    while pwm_val < 65535:
-        pwm_val+= 2048
-        if pwm_val == 63488:
-            pwm_val-= 1
-        a2.duty_u16(pwm_val)
-        b1.duty_u16(pwm_val)
-        sleep(.1)
-     while pwm_val > 0:
-        pwm_val- = 2048
-        a2.duty_u16(pwm_val)
-        b1.duty_u16(pwm_val)
-        if pwm_val == 2047:
-            pwm_val+ = 1
-        sleep(0.01)
-    func_clean()
-
-def east():
-    pwm_val = 0
-    while pwm_val < 65535:
-        pwm_val+= 2048
-        if pwm_val == 63488:
-            pwm_val-= 1
-        a1.duty_u16(pwm_val)
-        b2.duty_u16(pwm_val)
-        sleep(.1)
-     while pwm_val > 0:
-        pwm_val- = 2048
-        a1.duty_u16(pwm_val)
-        b2.duty_u16(pwm_val)
-        if pwm_val == 2047:
-            pwm_val+ = 1
-        sleep(0.01)
-    func_clean()
+def mov(dir):
+    if dir == "n":
+        accel("n")
+        deaccel("n")
+        gc.collect()
+    elif dir == "s":
+        accel("s")
+        deaccel("s")
+        gc.collect()
+    elif dir == "e":
+        accel("e")
+        deaccel("e")
+        gc.collect()
+    elif dir == "w":
+        accel("w")
+        deaccel("w")
+        gc.collect()
     
 def deinit():
     slp.value(0)
