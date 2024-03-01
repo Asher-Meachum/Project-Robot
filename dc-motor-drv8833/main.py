@@ -7,6 +7,12 @@ import backend as lib
 # This makes sure automatic garbage collection doesn't mess up timing.
 gc.disable()
 
+# This is because I don't want to write the "" for the mov function.
+n = "n"
+s = "s"
+e = "e"
+w = "w"
+
 # For program start confirmation when not at a display.
 LED = Pin("LED", Pin.OUT)
 LED.value(1)
@@ -16,10 +22,10 @@ def deinit():
     lib.deinit()
     gc.collect()
 
+gc.collect()
 try:
     while True:
         if bootsel_button():
-            gc.collect()
             sleep(1)
 
             deinit()
