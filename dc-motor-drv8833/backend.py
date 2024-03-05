@@ -2,10 +2,12 @@ from machine import PWM, Pin
 from time import sleep
 import gc
 
-# This makes sure automatic garbage collection doesn't interfering with timing.
+# Prevents automatic garbage collection from interfering with timing.
 gc.disable()
 
-slp = Pin(15, Pin.OUT) # This turns the DRV8833 board on. Is for Adafruit board.
+# This turns the DRV8833 board on. Is for Adafruit board.
+slp = Pin(15, Pin.OUT)
+
 a1 = PWM(Pin(17))
 a2 = PWM(Pin(16))
 b1 = PWM(Pin(19))
@@ -16,6 +18,7 @@ a1.init(freq = 1000, duty_u16 = 0)
 a2.init(freq = 1000, duty_u16 = 0)
 b1.init(freq = 1000, duty_u16 = 0)
 b2.init(freq = 1000, duty_u16 = 0)
+
 
 def accel(adir):
     magic_num = 2048
@@ -42,6 +45,7 @@ def accel(adir):
             b1.duty_u16(pwm_val)
         sleep(0.1)
 
+
 def deaccel(ddir):
     magic_num = 2048
     pwm_val = 65535
@@ -63,6 +67,7 @@ def deaccel(ddir):
             b1.duty_u16(pwm_val)
         sleep(0.1)
 
+
 def mov(dir):
     if dir == "n":
         accel("n")
@@ -80,7 +85,8 @@ def mov(dir):
         accel("w")
         deaccel("w")
         gc.collect()
-    
+
+
 def deinit():
     slp.value(0)
     a1.deinit()
