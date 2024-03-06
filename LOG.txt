@@ -13,3 +13,6 @@ I replaced the motors and wheels, which under a quick run appeared to clear up t
 
 02/24/2024
 The curved trajectory appears to be caused by the caster wheel's starting direction. Reversing the front and back end seems to have fixed the problem.
+
+03/06/2024
+After further testing, the reversal of front and back did not seem to fix the problem. The caster wheel was completely removed, and front and back went back to their original orientation.
