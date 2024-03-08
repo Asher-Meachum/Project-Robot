@@ -19,71 +19,67 @@ a2.init(freq = 1000, duty_u16 = 0)
 b1.init(freq = 1000, duty_u16 = 0)
 b2.init(freq = 1000, duty_u16 = 0)
 
-
-def accel(adir):
-    magic_num = 2048
-    pwm_val = 0
-    while pwm_val < 65535:
-        pwm_val+= magic_num
-        if pwm_val == magic_num:
-            pwm_val-= 1
-        if adir == "n":
-            a2.duty_u16(pwm_val)
-            sleep(.05)
-            b2.duty_u16(pwm_val)
-        elif adir == "s":
-            a1.duty_u16(pwm_val)
-            sleep(0.02)
-            b1.duty_u16(pwm_val)
-        elif adir == "e":
-            a1.duty_u16(pwm_val)
-            sleep(0.003)
-            b2.duty_u16(pwm_val)
-        elif adir == "w":
-            a2.duty_u16(pwm_val)
-            sleep(0.01)
-            b1.duty_u16(pwm_val)
-        sleep(0.1)
+directions = {
+    "n": (a2, b2),
+    "s": (a1, b1),
+    "e": (a1, b2),
+    "w": (a2, b1)
+}
 
 
-def deaccel(ddir):
-    magic_num = 2048
-    pwm_val = 65535
-    while pwm_val > 0:
-        pwm_val-= magic_num
-        if pwm_val == magic_num:
-            pwm_val-= 1
-        if ddir == "n":
-            a2.duty_u16(pwm_val)
-            b2.duty_u16(pwm_val)
-        elif ddir == "s":
-            a1.duty_u16(pwm_val)
-            b1.duty_u16(pwm_val)
-        elif ddir == "e":
-            a1.duty_u16(pwm_val)
-            b2.duty_u16(pwm_val)
-        elif ddir == "w":
-            a2.duty_u16(pwm_val)
-            b1.duty_u16(pwm_val)
-        sleep(0.1)
+def change_speed(sof, dir):
+    if sof > 0: # This part is for acceleration
+        if sof < 3: # For forwards and backwards
+            pwm_val = -1
+            change_frac = 8192
+            while pwm_val < 65535:
+                pwm_val+= change_frac
+                directions[dir][0].duty_u16(pwm_val)
+                directions[dir][1].duty_u16(pwm_val)
+                sleep(0.103)
+        elif sof > 2: # For rotation
+            pwm_val = -1
+            change_frac = 8192
+            while pwm_val < 65535:
+                pwm_val+= change_frac
+                directions[dir][0].duty_u16(pwm_val)
+                directions[dir][1].duty_u16(pwm_val)
+                sleep(0.103)
+    elif sof < 0: # This part is for deceleration.
+        if sof > -3: # For forwards and backwards
+            pwm_val = 65535
+            change_frac = 8192
+            while pwm_val > 0:
+                pwm_val-= change_frac
+                directions[dir][0].duty_u16(pwm_val)
+                directions[dir][1].duty_u16(pwm_val)
+                sleep(0.103)
+        elif sof < -2: # For rotation
+            pwm_val = 65535
+            change_frac = 8192
+            while pwm_val > 0:
+                pwm_val-= change_frac
+                directions[dir][0].duty_u16(pwm_val)
+                directions[dir][1].duty_u16(pwm_val)
+                sleep(0.103)
 
 
 def mov(dir):
     if dir == "n":
-        accel("n")
-        deaccel("n")
+        change_speed(1, "n")
+        change_speed(-1, "n")
         gc.collect()
     elif dir == "s":
-        accel("s")
-        deaccel("s")
+        change_speed(1, "s")
+        change_speed(-1, "s")
         gc.collect()
     elif dir == "e":
-        accel("e")
-        deaccel("e")
+        change_speed(3, "e")
+        change_speed(-3, "e")
         gc.collect()
     elif dir == "w":
-        accel("w")
-        deaccel("w")
+        change_speed(3, "w")
+        change_speed(-3, "w")
         gc.collect()
 
 
